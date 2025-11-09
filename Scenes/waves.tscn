@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://co17wc2opfkcn"]
+
+[ext_resource type="Script" uid="uid://c5vojfl0ab70x" path="res://Scripts/waves.gd" id="1_rqboq"]
+
+[sub_resource type="Gradient" id="Gradient_rqboq"]
+offsets = PackedFloat32Array(0.813333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.309804, 0.737255, 0.905882, 1)
+
+[node name="Wave" type="Line2D"]
+width = 20.0
+gradient = SubResource("Gradient_rqboq")
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("1_rqboq")

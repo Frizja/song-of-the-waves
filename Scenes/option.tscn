@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf6hkt8l0n5ql"]
+
+[ext_resource type="Script" uid="uid://ciu8n02g1d7dm" path="res://Scripts/option.gd" id="1_oxlww"]
+
+[node name="option" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Option"
+script = ExtResource("1_oxlww")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

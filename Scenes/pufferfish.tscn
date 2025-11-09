@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://byurrdauqd5ug"]
+
+[ext_resource type="Script" uid="uid://disqt6g6427da" path="res://Scripts/enemy.gd" id="1_fqyin"]
+[ext_resource type="Texture2D" uid="uid://dxvy1int1n8eh" path="res://Assets/Pufferfish.svg" id="2_jeck6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jxkhj"]
+resource_local_to_scene = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bxntn"]
+radius = 30.5655
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qxbm7"]
+resource_local_to_scene = true
+
+[node name="PufferfishEnemy" type="Area2D"]
+material = SubResource("ShaderMaterial_jxkhj")
+script = ExtResource("1_fqyin")
+color = Color(1, 1, 1, 1)
+rot = 0.2
+speed = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_bxntn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qxbm7")
+position = Vector2(0, -6)
+texture = ExtResource("2_jeck6")

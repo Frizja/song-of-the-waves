@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdsoql233sl6c"]
+
+[ext_resource type="Shader" uid="uid://dp0xscpvgpinc" path="res://blur.gdshader" id="1_emv3i"]
+[ext_resource type="Script" uid="uid://canyyh2v7kg13" path="res://Scripts/pause_menu.gd" id="1_k0w1u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0w1u"]
+shader = ExtResource("1_emv3i")
+shader_parameter/blur = 2.0
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_k0w1u")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_k0w1u")
+offset_left = -35.0
+offset_top = -17.0
+offset_right = 1172.0
+offset_bottom = 669.0
+
+[node name="Resume" type="Button" parent="."]
+offset_left = 531.0
+offset_top = 246.0
+offset_right = 601.0
+offset_bottom = 277.0
+text = "Resume"
+flat = true
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 543.0
+offset_top = 320.0
+offset_right = 585.0
+offset_bottom = 351.0
+text = "Quit"
+flat = true
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

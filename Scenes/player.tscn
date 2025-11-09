@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs8yycjkusxlk"]
+
+[ext_resource type="Texture2D" uid="uid://c0kq6pkciie2h" path="res://Assets/SeelLegs.svg" id="1_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://jvv0l4me2mp7" path="res://Assets/SeelBody3.svg" id="2_vgqql"]
+[ext_resource type="Texture2D" uid="uid://c5ifrqctjrbn0" path="res://Assets/SeelHead.svg" id="3_fkybt"]
+[ext_resource type="Script" uid="uid://cyp2f52xx4a82" path="res://Scripts/seel_body.gd" id="3_vgqql"]
+
+[sub_resource type="GDScript" id="GDScript_tpd1a"]
+resource_name = "Player"
+script/source = "extends CharacterBody2D
+var last_checkpoint = Vector2(0,0)
+var rot = 0.1
+var instance
+var interacting
+var SpeechBubble = preload(\"res://Scenes/speech_bubble.tscn\")
+var chosen
+
+func _ready() -> void:
+	if Global.level == 1 and not Global.already_seen_intro:
+		for i in Global.Dialog[Global.lang][\"Intro\"]:
+			say(i)
+		Global.already_seen_intro = true
+
+
+func _physics_process(delta: float) -> void:
+	Global.player_pos = position
+	if Input.is_action_pressed(\"mouse-l\"):
+		look_at(get_global_mouse_position())
+		rotate(1.5)
+		position += (position-get_global_mouse_position())/-50
+
+	move_and_slide()
+
+
+func _on_player_hitbox_area_entered(area: Area2D) -> void:
+	if area.name.contains(\"Checkpoint\"):
+		last_checkpoint = position
+	if area.name.contains(\"Enemy\") or area.name.contains(\"Pufferfish\"):
+		position = last_checkpoint
+
+
+func say(dialog:Array):
+	while is_instance_valid(instance):
+		await get_tree().process_frame
+	interacting = true
+	instance = SpeechBubble.instantiate()
+	instance.say = dialog[0]
+	instance.endsWith = dialog[1]
+	if dialog[1] == \"_options\":
+		instance.options = dialog[2]
+	instance.changey = -300
+	instance.changex = -50
+	add_child(instance)
+	while is_instance_valid(instance):
+		await get_tree().process_frame
+	interacting = false
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chitn"]
+size = Vector2(84, 139.25)
+
+[node name="Player" type="CharacterBody2D"]
+script = SubResource("GDScript_tpd1a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -80.375)
+shape = SubResource("RectangleShape2D_chitn")
+
+[node name="SeelHead" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(-1, -105)
+scale = Vector2(1.31395, 1.31395)
+texture = ExtResource("3_fkybt")
+offset = Vector2(0.761062, -10.6549)
+
+[node name="SeelBody" type="Sprite2D" parent="SeelHead"]
+z_index = 2
+position = Vector2(0.761062, 3.04425)
+rotation = -0.00132003
+scale = Vector2(1.00109, 1.00109)
+texture = ExtResource("2_vgqql")
+offset = Vector2(-8, 13)
+hframes = 2
+script = ExtResource("3_vgqql")
+y_offset = 3
+swim_animated = true
+
+[node name="SeelLegs" type="Sprite2D" parent="SeelHead/SeelBody"]
+position = Vector2(-1.44922, -53.9787)
+scale = Vector2(0.983061, 1.17076)
+texture = ExtResource("1_6t5aa")
+offset = Vector2(1.92844, 71.2255)
+script = ExtResource("3_vgqql")
+
+[node name="PlayerHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox"]
+position = Vector2(0, -80.375)
+shape = SubResource("RectangleShape2D_chitn")
+
+[connection signal="area_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]

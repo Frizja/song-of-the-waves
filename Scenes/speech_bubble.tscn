@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpesr2h4moetf"]
+
+[ext_resource type="Script" uid="uid://ct70a6n02r6be" path="res://Scripts/speech_bubble.gd" id="1_0ss60"]
+[ext_resource type="Texture2D" uid="uid://bumngngnda3wm" path="res://Assets/Triangle.svg" id="3_5ioj6"]
+
+[sub_resource type="Gradient" id="Gradient_kqxfy"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0ss60"]
+gradient = SubResource("Gradient_kqxfy")
+
+[node name="Speech Bubble" type="TextureRect"]
+z_index = 5
+offset_right = 256.0
+offset_bottom = 26.0
+texture = SubResource("GradientTexture1D_0ss60")
+script = ExtResource("1_0ss60")
+
+[node name="Text" type="RichTextLabel" parent="."]
+z_index = 3
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 249.0
+offset_bottom = 34.0
+bbcode_enabled = true
+text = "[color=#000000]...
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Triangle" type="Sprite2D" parent="."]
+position = Vector2(28, 34)
+texture = ExtResource("3_5ioj6")

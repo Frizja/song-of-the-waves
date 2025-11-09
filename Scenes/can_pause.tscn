@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6a3r46o86124"]
+
+[sub_resource type="GDScript" id="GDScript_slv3d"]
+resource_name = "can_pause"
+script/source = "extends Node
+var pause = preload(\"res://Scenes/pause_menu.tscn\")
+var instance
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed(\"esc\"):
+		instance = pause.instantiate()
+		add_child(instance)
+"
+
+[node name="can_pause" type="Node"]
+script = SubResource("GDScript_slv3d")
