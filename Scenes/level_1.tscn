@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c17kfkeu7onk3"]
+[gd_scene load_steps=56 format=3 uid="uid://c17kfkeu7onk3"]
 
 [ext_resource type="PackedScene" uid="uid://byurrdauqd5ug" path="res://Scenes/pufferfish.tscn" id="1_6444e"]
 [ext_resource type="PackedScene" uid="uid://cd8cnrhkakxiq" path="res://Scenes/enemy.tscn" id="2_evi0p"]
@@ -18,6 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://c6a3r46o86124" path="res://Scenes/can_pause.tscn" id="14_6ioyp"]
 [ext_resource type="Texture2D" uid="uid://b5chfr51p22i" path="res://Assets/Water Mouse.svg" id="15_oovug"]
 [ext_resource type="Texture2D" uid="uid://5vou2ndokgwb" path="res://Assets/Sand.svg" id="17_8yhm2"]
+[ext_resource type="Texture2D" uid="uid://d1p3hfkp1q83a" path="res://Assets/Shell.svg" id="19_yltlr"]
+[ext_resource type="PackedScene" uid="uid://ckf5qncn1yrvy" path="res://Scenes/lovi.tscn" id="20_6ssoq"]
+[ext_resource type="PackedScene" uid="uid://bn8rqi5y1v8v8" path="res://Scenes/jellyfish.tscn" id="21_imks0"]
+[ext_resource type="PackedScene" uid="uid://d25giu55woyxg" path="res://Scenes/shell.tscn" id="22_dlmop"]
 
 [sub_resource type="Gradient" id="Gradient_wowpa"]
 colors = PackedColorArray(0.0823529, 0.631373, 0.760784, 0.996078, 1, 1, 1, 0)
@@ -89,6 +93,57 @@ color = Color(1, 1, 1, 0.662745)
 color_ramp = SubResource("GradientTexture1D_8yhm2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8i23i"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjppf"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yltlr"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ssoq"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_imks0"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dlmop"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sda17"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1fal7"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gcla0"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vr6f4"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u5cqy"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0op5"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1f27d"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pm77i"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xub2v"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ts4pv"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bd6hb"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vyomg"]
 resource_local_to_scene = true
 
 [node name="Level1" type="Node2D"]
@@ -303,7 +358,7 @@ polygon = PackedVector2Array(38, -384, 75, -365, 141, -382, 205, -370, 271, -328
 z_index = -2
 color = Color(0.780772, 0.692549, 0.258782, 1)
 texture = SubResource("CanvasTexture_8yhm2")
-polygon = PackedVector2Array(-417, 835, -246, 840, -69, 838, 42, 845, 130, 866, 176, 896, 250, 932, 347, 961, 391, 980, 426, 1009, 514, 1062, 641, 1118, 744, 1153, 885, 1183, 1116, 1188, 1274, 1176, 1396, 1167, 1490, 1199, 1580, 1208, 1729, 1224, 1867, 1224, 2004, 1224, 2133, 1221, 2309, 1220, 2478, 1227, 2883, 1227, 3108, 1206, 3169, 1213, 3211, 1206, 3256, 1227, 3308, 1253, 3379, 1267, 3456, 1299, 3712, 1388, 3962, 1477, 4235, 1521, 4424, 1544, 4718, 1493, 4902, 1438, 5035, 1399, 5272, 1389, 5577, 1369, 5813, 1379, 6020, 1448, 6188, 1557, 6316, 1675, 6414, 1793, 6493, 2049, 6434, 2226, 6217, 2325, 6020, 2345, 5695, 2266, -1505, 2394, -1751, 2010, -1633, 1527)
+polygon = PackedVector2Array(-417, 835, -246, 840, -69, 838, 42, 845, 130, 866, 176, 896, 250, 932, 347, 961, 391, 980, 426, 1009, 514, 1062, 641, 1118, 744, 1153, 885, 1183, 1116, 1188, 1275, 1183, 1336, 1180, 1398, 1189, 1495, 1207, 1566, 1222, 1729, 1224, 1867, 1224, 2004, 1224, 2133, 1221, 2309, 1220, 2478, 1227, 2883, 1227, 3108, 1206, 3169, 1213, 3211, 1206, 3256, 1227, 3308, 1253, 3379, 1267, 3456, 1299, 3712, 1388, 3962, 1477, 4235, 1521, 4424, 1544, 4718, 1493, 4902, 1438, 5035, 1399, 5272, 1389, 5577, 1369, 5813, 1379, 6020, 1448, 6188, 1557, 6316, 1675, 6414, 1793, 6493, 2049, 6434, 2226, 6217, 2325, 6020, 2345, 5695, 2266, -1505, 2394, -1751, 2010, -1633, 1527)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D3"]
 
@@ -464,3 +519,232 @@ color = Color(0.716158, 0.281112, 0.466315, 1)
 speed = -3
 minX = -144
 maxX = 282
+
+[node name="PufferfishEnemy3" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_pjppf")
+position = Vector2(1018, 450)
+
+[node name="PufferfishEnemy4" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_yltlr")
+position = Vector2(1143, 1159)
+rot = -0.2
+
+[node name="PufferfishEnemy5" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_6ssoq")
+position = Vector2(1071, 513)
+rot = 0.1
+
+[node name="PufferfishEnemy6" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_imks0")
+position = Vector2(1262, 908)
+
+[node name="PufferfishEnemy7" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_dlmop")
+position = Vector2(886, 871)
+rot = -0.3
+
+[node name="Enemy3" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_sda17")
+position = Vector2(586, 288)
+color = Color(0.155011, 0.522313, 0.408481, 1)
+speed = -1
+minX = 586
+maxX = 902
+
+[node name="Enemy4" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_1fal7")
+position = Vector2(1021, 592)
+rotation = 0.466392
+color = Color(0.684753, 0.489748, 0.330701, 1)
+custom_path = true
+path_start = Vector2(1141, 700)
+path_end = Vector2(1269, 566)
+
+[node name="PufferfishEnemy8" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_gcla0")
+position = Vector2(1036, 587)
+scale = Vector2(0.9, 0.9)
+rot = -0.1
+
+[node name="Kelp6" type="Sprite2D" parent="."]
+position = Vector2(1203, 1120)
+texture = ExtResource("5_6444e")
+
+[node name="Kelp7" type="Sprite2D" parent="."]
+position = Vector2(1116, 1120)
+texture = ExtResource("5_6444e")
+
+[node name="Coral32" type="Sprite2D" parent="."]
+position = Vector2(1121, 461)
+rotation = -2.97789
+texture = ExtResource("6_lsmp6")
+
+[node name="PufferfishEnemy9" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_vr6f4")
+position = Vector2(1174, 1052)
+scale = Vector2(0.7, 0.7)
+rot = 0.3
+
+[node name="Checkpoint2" parent="." instance=ExtResource("12_uy8f0")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1789, 882)
+scale = Vector2(1.68605, 86.2984)
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+position = Vector2(1046, 1153)
+texture = ExtResource("15_oovug")
+lifetime = 1.7
+speed_scale = 0.7
+explosiveness = 0.2
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_pjppf")
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="."]
+position = Vector2(503, 526)
+texture = ExtResource("15_oovug")
+lifetime = 1.7
+speed_scale = 0.7
+explosiveness = 0.2
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_pjppf")
+
+[node name="Shell" type="Sprite2D" parent="."]
+modulate = Color(1, 0.67451, 1, 1)
+position = Vector2(1010, 1234)
+rotation = -0.481953
+texture = ExtResource("19_yltlr")
+
+[node name="Shell2" type="Sprite2D" parent="."]
+modulate = Color(0.803623, 0.974901, 0.90777, 1)
+position = Vector2(428, 1082)
+rotation = 2.99262
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("19_yltlr")
+
+[node name="Shell3" type="Sprite2D" parent="."]
+modulate = Color(0.65278, 0.364714, 0.199489, 1)
+position = Vector2(1230, 407)
+rotation = 2.84629
+texture = ExtResource("19_yltlr")
+
+[node name="Lovi" parent="." instance=ExtResource("20_6ssoq")]
+position = Vector2(-21, 800)
+
+[node name="Jellyfish" parent="." instance=ExtResource("21_imks0")]
+position = Vector2(840, 193)
+rotation = -1.28081
+
+[node name="Enemy5" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_u5cqy")
+position = Vector2(933, 388)
+rotation = -0.116855
+color = Color(0.310626, 0.689045, 0.779535, 1)
+speed = 4
+minX = 490
+maxX = 933
+
+[node name="PufferfishEnemy10" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_u0op5")
+position = Vector2(1137, 623)
+
+[node name="Enemy6" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_1f27d")
+position = Vector2(460, 966)
+color = Color(0.798121, 0.88148, 0.958172, 1)
+minX = 460
+maxX = 1495
+
+[node name="Polygon2D5" type="Polygon2D" parent="."]
+texture_repeat = 2
+position = Vector2(1753, 70)
+texture = ExtResource("7_pjppf")
+polygon = PackedVector2Array(414, 447, 471, 425, 528, 432, 580, 449, 629, 507, 660, 604, 606, 661, 554, 650, 488, 691, 449, 726, 404, 707, 366, 654, 327, 632, 312, 595, 327, 540, 330, 475, 378, 455)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D5"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D5/StaticBody2D"]
+polygon = PackedVector2Array(335, 477, 377, 460, 427, 451, 469, 433, 525, 436, 575, 459, 619, 509, 648, 601, 605, 649, 560, 642, 485, 687, 450, 718, 411, 706, 377, 655, 335, 630, 320, 600, 335, 547)
+
+[node name="Coral33" type="Sprite2D" parent="."]
+position = Vector2(2249, 482)
+texture = ExtResource("6_lsmp6")
+
+[node name="Coral34" type="Sprite2D" parent="."]
+position = Vector2(2186, 490)
+rotation = -0.254549
+texture = ExtResource("6_lsmp6")
+
+[node name="PufferfishEnemy11" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_pm77i")
+position = Vector2(2047, 484)
+rot = -0.2
+
+[node name="PufferfishEnemy12" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_xub2v")
+position = Vector2(2442, 553)
+
+[node name="PufferfishEnemy16" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_ts4pv")
+position = Vector2(2331, 8)
+
+[node name="PufferfishEnemy18" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_bd6hb")
+position = Vector2(2151, 357)
+rot = 0.5
+
+[node name="PufferfishEnemy20" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_vyomg")
+position = Vector2(2322, 506)
+
+[node name="Shell4" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(261, -254)
+rotation = -2.2278
+
+[node name="Shell5" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(1252, 1108)
+rotation = 0.393815
+
+[node name="Shell6" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(2304, 760)
+rotation = 1.89367
+
+[node name="Jellyfish2" parent="." instance=ExtResource("21_imks0")]
+position = Vector2(4258, -1388)
+
+[node name="Shell7" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4234, -1385)
+
+[node name="Shell8" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4288, -1415)
+rotation = 0.514885
+
+[node name="Shell9" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4289, -1358)
+rotation = -0.376909
+
+[node name="Shell10" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4228, -1328)
+rotation = 0.34044
+
+[node name="Shell11" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4242, -1440)
+
+[node name="Shell12" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4146, -1379)
+rotation = -0.39614
+
+[node name="Shell13" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4149, -1302)
+
+[node name="Shell14" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4296, -1268)
+
+[node name="Shell15" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4393, -1375)
+
+[node name="Shell16" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4075, -1354)
+
+[node name="Shell17" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4355, -1449)
+rotation = -0.712832

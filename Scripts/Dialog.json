@@ -1,5 +1,14 @@
 {
 	"en":{
+		"Lovi":[["Oh noooo-", "Space"],["...", "Space" ],["Hey.. who are you?", "_options", ["I am Seel Son of King Carpin.", "That's none of your buisness.", "..."]], ["Ahhah I don't care.", "Space"]],
+		"Lovi2":[["Wahh She's gonna eat me.", "Space"],["Ahhh! You are still here?!", "Space"], ["Pshh get lost!", "_options",["I don't think I will."]], ["Erghh.. fine, hey wait a second..", "Space"],["C-Could you help me?", "Space"], ["I mean you seem kind of strong..", "_options", ["Sure!", "Hell no you mean... fish!", "No, sorry.", "Depends."]]],
+		"LoviSure!":[["Thank you so much.", "Space"], ["You need to retrive 3 Jellyfish for me, they should be here somewhere.", "Space"]],
+		"LoviHell no you mean... fish!":[["That's the best insult you got?", "Space"], ["Pathetic.", "Space"]],
+		"LoviNo, sorry.":[["Eh, fine.", "Space"]],
+		"LoviDepends.":[["Okay, so like I was supposed to be babysitting these Jellyfish..", "Space"],["And umm long story short I lost like 3 of them.","Space"],["And I swear the mother is so creepy, like if I don't give her her children back she's gonna like eat me or something", "Space"], ["Please retrive them, they must be here somewhere.", "Space"]],
+		"LoviDone":[["Have you found them yet?", "_options", ["Yes"]], ["Phew, thank you sooo much.", "Space"]],
+		"LoviWaiting":[["Have you found them yet? The Jellyfish should be here somewhere.", "_options", ["No"]],["Ah, okay why did you talk to me then?!", "Space"]],
 		"Intro":[["...", "Space"],["Father..", "Space"],["I'll save you father.", "Space"],["I'll learn  the song of the waves.", "Space"],["And break the seal!", "Space"],["D-Don't worry..", "Space"]],
+	
 	}
 }

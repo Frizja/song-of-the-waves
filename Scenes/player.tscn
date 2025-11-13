@@ -8,6 +8,7 @@
 [sub_resource type="GDScript" id="GDScript_tpd1a"]
 resource_name = "Player"
 script/source = "extends CharacterBody2D
+@export var force = 0.002
 var last_checkpoint = Vector2(0,0)
 var rot = 0.1
 var instance
@@ -16,13 +17,17 @@ var SpeechBubble = preload(\"res://Scenes/speech_bubble.tscn\")
 var chosen
 
 func _ready() -> void:
-	if Global.level == 1 and not Global.already_seen_intro:
-		for i in Global.Dialog[Global.lang][\"Intro\"]:
-			say(i)
-		Global.already_seen_intro = true
+	pass
+	#if Global.level == 1 and not Global.already_seen_intro:
+		#for i in Global.Dialog[Global.lang][\"Intro\"]:
+		#	say(i)
+		#Global.already_seen_intro = true
 
 
 func _physics_process(delta: float) -> void:
+	for i in get_slide_collision_count():
+		if get_slide_collision(i).get_collider() is RigidBody2D:
+			get_slide_collision(i).get_collider().apply_central_impulse(-get_slide_collision(i).get_normal() * force)
 	Global.player_pos = position
 	if Input.is_action_pressed(\"mouse-l\"):
 		look_at(get_global_mouse_position())
@@ -60,6 +65,7 @@ func say(dialog:Array):
 size = Vector2(84, 139.25)
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = SubResource("GDScript_tpd1a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

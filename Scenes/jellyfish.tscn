@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn8rqi5y1v8v8"]
+
+[ext_resource type="Texture2D" uid="uid://myg2l5krtb68" path="res://Assets/Jellyfish.svg" id="1_vhqib"]
+[ext_resource type="Script" uid="uid://1fb7ikb4iafx" path="res://Scripts/jellyfish.gd" id="2_cvath"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhqib"]
+size = Vector2(20, 32)
+
+[node name="Jellyfish" type="Sprite2D"]
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("1_vhqib")
+script = ExtResource("2_cvath")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_vhqib")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

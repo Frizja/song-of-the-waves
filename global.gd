@@ -1,11 +1,14 @@
 extends Node
 var player_pos = Vector2(0,0)
 var Dialog = {}
+var talked_to = []
 var data_file_path = "res://Scripts/Dialog.json"
 var chosen = {}
 var lang = "en"
 var already_seen_intro = false
 var level = 1
+var Jellyfish = 0
+var items = []
 
 func _ready() -> void:
 	Dialog = load_json(data_file_path)
