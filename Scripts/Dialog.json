@@ -9,6 +9,7 @@
 		"LoviDone":[["Have you found them yet?", "_options", ["Yes"]], ["Phew, thank you sooo much.", "Space"]],
 		"LoviWaiting":[["Have you found them yet? The Jellyfish should be here somewhere.", "_options", ["No"]],["Ah, okay why did you talk to me then?!", "Space"]],
 		"Intro":[["...", "Space"],["Father..", "Space"],["I'll save you father.", "Space"],["I'll learn  the song of the waves.", "Space"],["And break the seal!", "Space"],["D-Don't worry..", "Space"]],
+		"Herera":[["Seel.. that's your name right?", "_options",["It is.", "How do you know?"]],["Hahaha, the old Carpin having a son.. I feel pity for you, honestly.", "Space"], ["He's a horrible person, but you wouldn't know.. who would tell their child how horrible they are?", "Space"], ["The song of the waves, that's what your searching? To break the seal?", "Space"], ["Well luckily I am guarding it.", "Space"], ["...", "Space"], ["Fight me child if you so wish to free your father...", "Space"]],
 	
 	}
 }

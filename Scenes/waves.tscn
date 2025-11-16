@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://c5vojfl0ab70x" path="res://Scripts/waves.gd" id="1_rqboq"]
 
 [sub_resource type="Gradient" id="Gradient_rqboq"]
-offsets = PackedFloat32Array(0.813333, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.309804, 0.737255, 0.905882, 1)
+offsets = PackedFloat32Array(0.746667, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.294118, 0.145098, 0.403922, 1)
 
 [node name="Wave" type="Line2D"]
 width = 20.0

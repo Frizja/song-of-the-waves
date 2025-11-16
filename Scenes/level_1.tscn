@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://c17kfkeu7onk3"]
+[gd_scene load_steps=57 format=3 uid="uid://c17kfkeu7onk3"]
 
 [ext_resource type="PackedScene" uid="uid://byurrdauqd5ug" path="res://Scenes/pufferfish.tscn" id="1_6444e"]
 [ext_resource type="PackedScene" uid="uid://cd8cnrhkakxiq" path="res://Scenes/enemy.tscn" id="2_evi0p"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://ckf5qncn1yrvy" path="res://Scenes/lovi.tscn" id="20_6ssoq"]
 [ext_resource type="PackedScene" uid="uid://bn8rqi5y1v8v8" path="res://Scenes/jellyfish.tscn" id="21_imks0"]
 [ext_resource type="PackedScene" uid="uid://d25giu55woyxg" path="res://Scenes/shell.tscn" id="22_dlmop"]
+[ext_resource type="PackedScene" uid="uid://cxocwmtdaeuoc" path="res://Scenes/herera.tscn" id="23_sda17"]
 
 [sub_resource type="Gradient" id="Gradient_wowpa"]
 colors = PackedColorArray(0.0823529, 0.631373, 0.760784, 0.996078, 1, 1, 1, 0)
@@ -748,3 +749,6 @@ position = Vector2(4075, -1354)
 [node name="Shell17" parent="." instance=ExtResource("22_dlmop")]
 position = Vector2(4355, -1449)
 rotation = -0.712832
+
+[node name="Herera" parent="." instance=ExtResource("23_sda17")]
+position = Vector2(291, 471)
