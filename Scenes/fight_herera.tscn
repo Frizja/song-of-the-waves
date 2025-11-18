@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cbrrtwqpadmrc"]
 
-[ext_resource type="Texture2D" uid="uid://bansrbwmmb2h8" path="res://Assets/Seel.svg" id="1_ijo5o"]
-[ext_resource type="Texture2D" uid="uid://bbjpsmfyumfrd" path="res://Assets/Herera.svg" id="2_nrd4x"]
+[ext_resource type="Texture2D" uid="uid://2bh1a11w3in6" path="res://Assets/SeelFightMusic.svg" id="1_inwit"]
 [ext_resource type="PackedScene" uid="uid://co17wc2opfkcn" path="res://Scenes/waves.tscn" id="3_nrd4x"]
 [ext_resource type="PackedScene" uid="uid://c6a3r46o86124" path="res://Scenes/can_pause.tscn" id="4_ifexr"]
+[ext_resource type="Texture2D" uid="uid://btnyt7c877qsg" path="res://Assets/HereraFight.svg" id="4_mse0p"]
 [ext_resource type="LabelSettings" uid="uid://brm8wqw6kb6sc" path="res://text_settings.tres" id="5_inwit"]
 
 [sub_resource type="GDScript" id="GDScript_ijo5o"]
@@ -23,12 +23,20 @@ func _ready() -> void:
 		while !wave.done:
 			await get_tree().process_frame
 		get_child(0).text = \"Well done!\"
+		wave.current_goal  = 0
 		while !Input.is_action_pressed(\"Space\"):
 			await get_tree().process_frame
 		get_child(0).queue_free()
-		await get_tree().create_timer(0.5).timeout
-		wave.current_goal = 1
-		wave.start()
+		while wave.current_goal < wave.goals.size()-1:
+			while Input.is_action_pressed(\"Space\"):
+				await get_tree().process_frame
+			if wave.score > 8000:
+				wave.current_goal += 1
+			wave.start()
+			wave.done = false
+			while !wave.done:
+				await get_tree().process_frame
+		get_child(0).queue_free()
 	else:
 		wave.start()
 
@@ -56,17 +64,18 @@ func _process(delta: float) -> void:
 [node name="FightHerera" type="Node2D"]
 
 [node name="SeelFight" type="Sprite2D" parent="."]
-position = Vector2(128, 320)
-texture = ExtResource("1_ijo5o")
+position = Vector2(180, 489)
+texture = ExtResource("1_inwit")
 script = SubResource("GDScript_ijo5o")
 tutorial = true
 
 [node name="Label" type="Label" parent="SeelFight"]
-offset_left = -63.0
-offset_top = 146.0
-offset_right = 308.0
-offset_bottom = 247.0
-text = "[Follow]                              your opponents wave
+offset_left = 561.0
+offset_top = -452.0
+offset_right = 932.0
+offset_bottom = -351.0
+text = "[Follow]                              your opponents wave to
+                                            attack them
 
 [Don't do anything]        make the wave go up
 [Hold Space]                     make the wave go down"
@@ -74,6 +83,7 @@ label_settings = ExtResource("5_inwit")
 
 [node name="Wave" parent="SeelFight" instance=ExtResource("3_nrd4x")]
 position = Vector2(102, 0)
+points = PackedVector2Array(-86, 4)
 goal = true
 
 [node name="Goal" type="Line2D" parent="SeelFight/Wave"]
@@ -85,8 +95,9 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="HereraFight" type="Sprite2D" parent="."]
-position = Vector2(1024, 320)
-texture = ExtResource("2_nrd4x")
+z_index = -2
+position = Vector2(903, 345)
+texture = ExtResource("4_mse0p")
 script = SubResource("GDScript_nrd4x")
 
 [node name="can_pause" parent="." instance=ExtResource("4_ifexr")]

@@ -14,11 +14,14 @@ var goals = [[Vector2(112.0, 0.0), Vector2(117.8824, -0.7), Vector2(122.4486, -1
 @export var current_goal = 0
 
 func start() -> void:
+	score = 10000
 	points = []
 	pos = position
 	if goal:
 		get_child(0).points = goals[current_goal]
 	for i in len:
+		while get_tree().paused:
+			await get_tree().process_frame
 		pos += Vector2.RIGHT*(speed/(abs(a)+1))
 		if not Input.is_action_pressed("Space"):
 			pos.y -= a  
@@ -41,5 +44,6 @@ func start() -> void:
 	if goal:
 		for j in points.size():
 			score -= floor(points[j].distance_to(get_child(0).points[j]))
-		if score < 0: score = 0
+	#print("a"+str(points.size()))
+	#print("n"+str(get_child(0).points.size()))
 	done = true
