@@ -1,0 +1,120 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddwpyphm3bf6d"]
+
+[ext_resource type="PackedScene" uid="uid://bs8yycjkusxlk" path="res://Scenes/player.tscn" id="2_smnlx"]
+[ext_resource type="PackedScene" uid="uid://c6a3r46o86124" path="res://Scenes/can_pause.tscn" id="3_12fag"]
+[ext_resource type="AudioStream" uid="uid://cb46xt24dfhav" path="res://Assets/6598845823320064.wav" id="4_1q6tm"]
+[ext_resource type="Texture2D" uid="uid://bbjpsmfyumfrd" path="res://Assets/Herera.svg" id="4_v36qu"]
+
+[sub_resource type="GDScript" id="GDScript_12fag"]
+resource_name = "camera"
+script/source = "extends Camera2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	rotation_degrees = 0 - get_parent().rotation_degrees
+"
+
+[sub_resource type="GDScript" id="GDScript_1q6tm"]
+resource_name = "HereraEnd"
+script/source = "extends Sprite2D
+var instance
+var interacting
+var SpeechBubble = preload(\"res://Scenes/speech_bubble.tscn\")
+var EndQuestion = preload(\"res://Scenes/end_question.tscn\")
+var End = preload(\"res://Scenes/freed_father_ending.tscn\")
+var chosen
+@onready var area = $Area2D
+@onready var label = $Label
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	while true:
+		await get_tree().process_frame
+		if str(area.get_overlapping_areas()).contains(\"PlayerHitbox\") and Input.is_action_just_pressed(\"Space\"):
+			for i in Global.Dialog[Global.lang][\"HereraEnd\"]:
+				say(i)
+			while interacting:
+				await get_tree().process_frame
+			if chosen != \"You are just trying to trick me aren't you?\":
+				for i in Global.Dialog[Global.lang][\"HereraGoodEnd\"]:
+					say(i)
+				while interacting:
+					await get_tree().process_frame
+				instance = EndQuestion.instantiate()
+				get_parent().get_parent().add_child(instance)
+				get_parent().queue_free()
+			else:
+				instance = End.instantiate()
+				get_parent().get_parent().add_child(instance)
+				get_parent().queue_free()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if str(area.get_overlapping_areas()).contains(\"PlayerHitbox\"):
+		label.show()
+	else:
+		label.hide()
+
+func say(dialog:Array):
+	while is_instance_valid(instance):
+		await get_tree().process_frame
+	interacting = true
+	instance = SpeechBubble.instantiate()
+	instance.say = dialog[0]
+	instance.endsWith = dialog[1]
+	if dialog[1] == \"_options\":
+		instance.options = dialog[2]
+	instance.changey = -200
+	instance.changex = -50
+	add_child(instance)
+	while is_instance_valid(instance):
+		await get_tree().process_frame
+	interacting = false
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q6tm"]
+size = Vector2(65, 220)
+
+[node name="Level2" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_smnlx")]
+z_index = 2
+position = Vector2(315, 293)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+ignore_rotation = false
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = SubResource("GDScript_12fag")
+
+[node name="can_pause" parent="." instance=ExtResource("3_12fag")]
+
+[node name="6598845823320064" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1q6tm")
+autoplay = true
+
+[node name="Herera" type="Sprite2D" parent="."]
+position = Vector2(306, 468)
+texture = ExtResource("4_v36qu")
+script = SubResource("GDScript_1q6tm")
+
+[node name="Area2D" type="Area2D" parent="Herera"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Herera/Area2D"]
+position = Vector2(28.5, 1)
+shape = SubResource("RectangleShape2D_1q6tm")
+
+[node name="Label" type="Label" parent="Herera"]
+offset_left = 97.0
+offset_top = 6.0
+offset_right = 153.0
+offset_bottom = 29.0
+text = "[Space]"

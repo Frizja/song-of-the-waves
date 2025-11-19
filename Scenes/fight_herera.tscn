@@ -1,19 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbrrtwqpadmrc"]
+[gd_scene load_steps=20 format=3 uid="uid://cbrrtwqpadmrc"]
 
 [ext_resource type="Texture2D" uid="uid://2bh1a11w3in6" path="res://Assets/SeelFightMusic.svg" id="1_inwit"]
 [ext_resource type="PackedScene" uid="uid://co17wc2opfkcn" path="res://Scenes/waves.tscn" id="3_nrd4x"]
 [ext_resource type="PackedScene" uid="uid://c6a3r46o86124" path="res://Scenes/can_pause.tscn" id="4_ifexr"]
 [ext_resource type="Texture2D" uid="uid://btnyt7c877qsg" path="res://Assets/HereraFight.svg" id="4_mse0p"]
 [ext_resource type="LabelSettings" uid="uid://brm8wqw6kb6sc" path="res://text_settings.tres" id="5_inwit"]
+[ext_resource type="AudioStream" uid="uid://cb46xt24dfhav" path="res://Assets/6598845823320064.wav" id="6_mse0p"]
+[ext_resource type="Texture2D" uid="uid://bf1uqvqihwics" path="res://Assets/Light.svg" id="7_rr501"]
+[ext_resource type="Texture2D" uid="uid://dw4nj5jigllvo" path="res://Assets/Coral1.svg" id="8_phvar"]
+[ext_resource type="Texture2D" uid="uid://co5hw45vl0wv1" path="res://Assets/Coral2.svg" id="9_0b5bi"]
+[ext_resource type="Texture2D" uid="uid://b5chfr51p22i" path="res://Assets/Water Mouse.svg" id="10_sfn6d"]
 
 [sub_resource type="GDScript" id="GDScript_ijo5o"]
 resource_name = "Seel Fight"
 script/source = "extends Sprite2D
 @onready var wave = $Wave
+@onready var music = $Song
 @export var tutorial = false
+var instance
+var attack = preload(\"res://Scenes/attack_herera.tscn\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	music.play()
 	if tutorial:
 		while !Input.is_action_pressed(\"Space\"):
 			await get_tree().process_frame
@@ -36,20 +45,25 @@ func _ready() -> void:
 			wave.done = false
 			while !wave.done:
 				await get_tree().process_frame
-		get_child(0).queue_free()
+		music.playing = false
+		instance = attack.instantiate()
+		get_parent().get_parent().add_child(instance)
+		get_parent().queue_free()
 	else:
 		wave.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+		if music.playing:
+			music.pitch_scale = (10-(wave.pos.y)/10)/30+1
+			offset.y = wave.pos.y/10
 "
 
 [sub_resource type="GDScript" id="GDScript_nrd4x"]
 resource_name = "Herera Fight"
 script/source = "extends Sprite2D
-
+var sin_use = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -58,8 +72,38 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	position.y += sin(sin_use)
+	sin_use += delta*2
 "
+
+[sub_resource type="Gradient" id="Gradient_0b5bi"]
+colors = PackedColorArray(0, 0.705882, 1, 1, 0.39379, 0.507491, 0.898491, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rr501"]
+gradient = SubResource("Gradient_0b5bi")
+
+[sub_resource type="Gradient" id="Gradient_sfn6d"]
+colors = PackedColorArray(0.206445, 0.102836, 0.566713, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0b5bi"]
+gradient = SubResource("Gradient_sfn6d")
+
+[sub_resource type="Gradient" id="Gradient_f8pie"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.294118)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x7e42"]
+gradient = SubResource("Gradient_f8pie")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sxfuv"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(30, 1, 1)
+angle_min = -16.6
+angle_max = 74.5
+gravity = Vector3(0, -90, 0)
+color = Color(1, 1, 1, 0.662745)
+color_ramp = SubResource("GradientTexture1D_x7e42")
 
 [node name="FightHerera" type="Node2D"]
 
@@ -94,6 +138,9 @@ joint_mode = 1
 begin_cap_mode = 2
 end_cap_mode = 2
 
+[node name="Song" type="AudioStreamPlayer" parent="SeelFight"]
+stream = ExtResource("6_mse0p")
+
 [node name="HereraFight" type="Sprite2D" parent="."]
 z_index = -2
 position = Vector2(903, 345)
@@ -101,3 +148,170 @@ texture = ExtResource("4_mse0p")
 script = SubResource("GDScript_nrd4x")
 
 [node name="can_pause" parent="." instance=ExtResource("4_ifexr")]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -10
+offset_left = 1484.0
+offset_top = -370.0
+offset_right = 2479.0
+offset_bottom = 1387.0
+rotation = 1.57079
+texture = SubResource("GradientTexture1D_rr501")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = -279.0
+offset_top = 1305.0
+offset_right = 716.0
+offset_bottom = 3062.0
+rotation = -1.57079
+texture = SubResource("GradientTexture1D_0b5bi")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(72.2269, 128.865)
+rotation = -0.582835
+scale = Vector2(0.786585, 7.59001)
+texture = ExtResource("7_rr501")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(110.227, 127.865)
+rotation = -0.726094
+scale = Vector2(0.328755, 7.59001)
+texture = ExtResource("7_rr501")
+
+[node name="Coral1" type="Sprite2D" parent="."]
+self_modulate = Color(0.880702, 0.750551, 0.718614, 1)
+position = Vector2(31.2946, 63.7485)
+rotation = -0.432605
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("8_phvar")
+
+[node name="Coral2" type="Sprite2D" parent="."]
+position = Vector2(-56.7054, 138.749)
+rotation = -0.99772
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("8_phvar")
+
+[node name="Coral3" type="Sprite2D" parent="."]
+position = Vector2(49.2946, 28.7485)
+rotation = -0.256506
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("8_phvar")
+
+[node name="Coral4" type="Sprite2D" parent="."]
+position = Vector2(-28.4114, 51.8845)
+rotation = -1.0513
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("8_phvar")
+
+[node name="Coral5" type="Sprite2D" parent="."]
+position = Vector2(131, 17.7465)
+rotation = -0.125297
+scale = Vector2(1.34934, 1.50542)
+texture = ExtResource("8_phvar")
+
+[node name="Coral6" type="Sprite2D" parent="."]
+position = Vector2(-20.2704, 21.1255)
+rotation = -0.246288
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("8_phvar")
+
+[node name="Coral7" type="Sprite2D" parent="."]
+position = Vector2(-108.27, 96.1255)
+rotation = -0.811403
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("8_phvar")
+
+[node name="Coral8" type="Sprite2D" parent="."]
+position = Vector2(-2.27037, -13.8745)
+rotation = -0.0701892
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("8_phvar")
+
+[node name="Coral9" type="Sprite2D" parent="."]
+position = Vector2(-79.9763, 9.26149)
+rotation = -0.864983
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("8_phvar")
+
+[node name="Coral10" type="Sprite2D" parent="."]
+position = Vector2(79.4343, -24.8765)
+rotation = 0.0610197
+scale = Vector2(1.34934, 1.50542)
+texture = ExtResource("8_phvar")
+
+[node name="Coral11" type="Sprite2D" parent="."]
+position = Vector2(-4.00035, -41.2535)
+rotation = -0.125297
+texture = ExtResource("8_phvar")
+
+[node name="Coral12" type="Sprite2D" parent="."]
+position = Vector2(98.9996, -44.2535)
+rotation = -0.125297
+texture = ExtResource("8_phvar")
+
+[node name="Coral13" type="Sprite2D" parent="."]
+position = Vector2(162, -25.2535)
+rotation = -0.125297
+texture = ExtResource("8_phvar")
+
+[node name="Coral14" type="Sprite2D" parent="."]
+self_modulate = Color(0.780392, 0.627451, 0.509804, 0.898039)
+z_index = 7
+position = Vector2(57.9996, 3.74648)
+rotation = -0.280506
+scale = Vector2(2, 2.27778)
+texture = ExtResource("8_phvar")
+
+[node name="Coral15" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(162, -18.2535)
+rotation = -0.125297
+texture = ExtResource("8_phvar")
+
+[node name="Coral16" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(209, -12.2535)
+rotation = -0.040921
+texture = ExtResource("8_phvar")
+
+[node name="Coral17" type="Sprite2D" parent="."]
+self_modulate = Color(0.780392, 0.627451, 0.509804, 0.898039)
+z_index = 7
+position = Vector2(136, -16.2535)
+rotation = 0.0611247
+scale = Vector2(2, 2.27778)
+texture = ExtResource("8_phvar")
+
+[node name="Coral18" type="Sprite2D" parent="."]
+position = Vector2(1071, 606)
+scale = Vector2(3.32, 3.32)
+texture = ExtResource("9_0b5bi")
+
+[node name="Coral19" type="Sprite2D" parent="."]
+position = Vector2(978, 641)
+scale = Vector2(3.42, 3.42)
+texture = ExtResource("9_0b5bi")
+
+[node name="Coral20" type="Sprite2D" parent="."]
+position = Vector2(1154, 451)
+rotation = -1.32467
+scale = Vector2(2.44, 2.44)
+texture = ExtResource("9_0b5bi")
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="."]
+position = Vector2(279, 401)
+texture = ExtResource("10_sfn6d")
+lifetime = 1.7
+speed_scale = 0.7
+explosiveness = 0.2
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_sxfuv")
+
+[node name="GPUParticles2D5" type="GPUParticles2D" parent="."]
+position = Vector2(989, 533)
+texture = ExtResource("10_sfn6d")
+lifetime = 1.7
+speed_scale = 0.7
+explosiveness = 0.2
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_sxfuv")

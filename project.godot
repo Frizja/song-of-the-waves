@@ -13,7 +13,8 @@ config_version=5
 config/name="Song of The Waves"
 run/main_scene="uid://d2lfirl3uyf8u"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.405934, 0.422968, 0.811761, 1)
+config/icon="uid://dxvy1int1n8eh"
 
 [autoload]
 

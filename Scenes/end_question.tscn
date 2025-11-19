@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwagjykb2mamg"]
+
+[sub_resource type="GDScript" id="GDScript_yf4pk"]
+resource_name = "end question"
+script/source = "extends Node2D
+var end1 = preload(\"res://Scenes/freed_father_ending.tscn\")
+var end2 = preload(\"res://Scenes/sealed_father_ending.tscn\")
+var instance
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_button_button_down() -> void:
+	instance = end1.instantiate()
+	get_parent().add_child(instance)
+	queue_free()
+
+
+func _on_button_2_button_down() -> void:
+	instance = end2.instantiate()
+	get_parent().add_child(instance)
+	queue_free()
+"
+
+[node name="End Question" type="Node2D"]
+script = SubResource("GDScript_yf4pk")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 528.0
+offset_top = 234.0
+offset_right = 624.0
+offset_bottom = 257.0
+text = "Free Father?"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = 551.0
+offset_top = 274.0
+offset_right = 586.0
+offset_bottom = 305.0
+text = "Yes"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 553.0
+offset_top = 328.0
+offset_right = 584.0
+offset_bottom = 359.0
+text = "No"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="Button2" to="." method="_on_button_2_button_down"]

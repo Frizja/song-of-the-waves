@@ -1,0 +1,391 @@
+[gd_scene load_steps=20 format=3 uid="uid://ulidysi4ddao"]
+
+[ext_resource type="Texture2D" uid="uid://bf1uqvqihwics" path="res://Assets/Light.svg" id="1_wjfbt"]
+[ext_resource type="Texture2D" uid="uid://dw4nj5jigllvo" path="res://Assets/Coral1.svg" id="2_yn1h0"]
+[ext_resource type="Texture2D" uid="uid://co5hw45vl0wv1" path="res://Assets/Coral2.svg" id="3_nemtd"]
+[ext_resource type="PackedScene" uid="uid://bs8yycjkusxlk" path="res://Scenes/player.tscn" id="4_yn1h0"]
+[ext_resource type="Texture2D" uid="uid://do6vie2gtjrrr" path="res://Assets/Shell Shield2.svg" id="5_m2ccp"]
+[ext_resource type="PackedScene" uid="uid://c6a3r46o86124" path="res://Scenes/can_pause.tscn" id="5_nemtd"]
+[ext_resource type="Texture2D" uid="uid://btnyt7c877qsg" path="res://Assets/HereraFight.svg" id="7_7edhw"]
+[ext_resource type="Texture2D" uid="uid://b5chfr51p22i" path="res://Assets/Water Mouse.svg" id="8_2n7ju"]
+[ext_resource type="AudioStream" uid="uid://chwlitn06x1du" path="res://Assets/Battle Music (Music 5) .wav" id="9_360jh"]
+
+[sub_resource type="GDScript" id="GDScript_360jh"]
+resource_name = "attack"
+script/source = "extends Node2D
+var attack = preload(\"res://Scenes/water_attack.tscn\")
+var level_2 = preload(\"res://Scenes/level_2.tscn\")
+var instance
+var attacks = []
+var started = false
+var time = 0
+var current_attack = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	Global.player_pos = Vector2(0,0)
+	while !Input.is_action_pressed(\"mouse-l\"):
+		await get_tree().process_frame
+	started = true
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if started:
+		time += delta
+		var to_remove = []
+		for i in attacks.size():
+			if !is_instance_valid(i):
+				to_remove.append(i)
+		for i in to_remove:
+			#why is this causing errors? idk but it only seems to do that so I'll just keep it? I am tierd.
+			attacks.remove_at(i)
+	# I know I could have done this better, but I want to get this done and it is pretty late 
+	if time > 0.1 and current_attack == 0:
+		current_attack += 1
+		attacks.append(attack.instantiate())
+		attacks[attacks.size()-1].position = Vector2(550.0,20)
+		add_child(attacks[attacks.size()-1])
+	if time > 1 and current_attack == 1:
+		current_attack += 1
+		attacks.append(attack.instantiate())
+		attacks[attacks.size()-1].position = Vector2(450.0,20)
+		attacks[attacks.size()-1].speed = 400
+		add_child(attacks[attacks.size()-1])
+		attacks.append(attack.instantiate())
+		attacks[attacks.size()-1].position = Vector2(650.0,20)
+		attacks[attacks.size()-1].speed = 400
+		add_child(attacks[attacks.size()-1])
+	if time > 2 and current_attack == 2:
+		current_attack += 1
+		attacks.append(attack.instantiate())
+		attacks[attacks.size()-1].position = Vector2(450.0,20)
+		attacks[attacks.size()-1].speed = 400
+		add_child(attacks[attacks.size()-1])
+		attacks.append(attack.instantiate())
+		attacks[attacks.size()-1].position = Vector2(650.0,20)
+		attacks[attacks.size()-1].speed = 500
+		add_child(attacks[attacks.size()-1])
+		for i in 10:
+			attacks.append(attack.instantiate())
+			attacks[attacks.size()-1].position = Vector2(Global.player_pos.x + randf_range(-30,30), 20)
+			attacks[attacks.size()-1].speed = 400 + 10*i
+			add_child(attacks[attacks.size()-1])
+			await get_tree().create_timer(0.2).timeout
+
+	if time > 3 and current_attack == 3:
+		current_attack += 1
+		attacks.append(attack.instantiate())
+		attacks[attacks.size()-1].position = Vector2(450.0,620)
+		attacks[attacks.size()-1].speed = -400
+		add_child(attacks[attacks.size()-1])
+		attacks.append(attack.instantiate())
+		attacks[attacks.size()-1].position = Vector2(650.0,20)
+		attacks[attacks.size()-1].speed = 500
+		add_child(attacks[attacks.size()-1])
+		for i in 20:
+			attacks.append(attack.instantiate())
+			attacks[attacks.size()-1].position = Vector2(540+Global.player_pos.x + randf_range(-30,30), 620)
+			attacks[attacks.size()-1].speed = -(400 + 10*i)
+			add_child(attacks[attacks.size()-1])
+			await get_tree().create_timer(0.1).timeout
+		
+		if time > 3.5 and current_attack == 4:
+			current_attack += 1
+			for i in 10:
+				attacks.append(attack.instantiate())
+				attacks[attacks.size()-1].position = Vector2(Global.player_pos.x + randf_range(-30,30), 620)
+				attacks[attacks.size()-1].speed = -(400 + 10*i)
+				add_child(attacks[attacks.size()-1])
+				attacks.append(attack.instantiate())
+				attacks[attacks.size()-1].position = Vector2(Global.player_pos.x + randf_range(-30,30), 20)
+				attacks[attacks.size()-1].speed = (400 + 10*i)
+				add_child(attacks[attacks.size()-1])
+				await get_tree().create_timer(0.3).timeout
+				
+		if time > 6:
+			instance = level_2.instantiate()
+			get_parent().add_child(instance)
+			queue_free()
+		
+"
+
+[sub_resource type="Gradient" id="Gradient_mse0p"]
+colors = PackedColorArray(0, 0.705882, 1, 1, 0.39379, 0.507491, 0.898491, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m2ccp"]
+gradient = SubResource("Gradient_mse0p")
+
+[sub_resource type="Gradient" id="Gradient_phvar"]
+colors = PackedColorArray(0.206445, 0.102836, 0.566713, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7edhw"]
+gradient = SubResource("Gradient_phvar")
+
+[sub_resource type="GDScript" id="GDScript_7edhw"]
+resource_name = "shellShield"
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	look_at(get_global_mouse_position())
+	rotate(1.5)
+	position = Vector2(0,0)
+	global_position += (global_position-get_global_mouse_position())/-2
+"
+
+[sub_resource type="GDScript" id="GDScript_2n7ju"]
+resource_name = "Herera Fight"
+script/source = "extends Sprite2D
+var sin_use = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	position.y += sin(sin_use)
+	sin_use += delta*2
+"
+
+[sub_resource type="Gradient" id="Gradient_360jh"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.294118)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8yhm2"]
+gradient = SubResource("Gradient_360jh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4oyyd"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(30, 1, 1)
+angle_min = -16.6
+angle_max = 74.5
+gravity = Vector3(0, -90, 0)
+color = Color(1, 1, 1, 0.662745)
+color_ramp = SubResource("GradientTexture1D_8yhm2")
+
+[node name="AttackHerera" type="Node2D"]
+script = SubResource("GDScript_360jh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -10
+offset_left = 1484.0
+offset_top = -370.0
+offset_right = 2479.0
+offset_bottom = 1387.0
+rotation = 1.57079
+texture = SubResource("GradientTexture1D_m2ccp")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = -279.0
+offset_top = 1305.0
+offset_right = 716.0
+offset_bottom = 3062.0
+rotation = -1.57079
+texture = SubResource("GradientTexture1D_7edhw")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(72.2269, 128.865)
+rotation = -0.582835
+scale = Vector2(0.786585, 7.59001)
+texture = ExtResource("1_wjfbt")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(110.227, 127.865)
+rotation = -0.726094
+scale = Vector2(0.328755, 7.59001)
+texture = ExtResource("1_wjfbt")
+
+[node name="Coral1" type="Sprite2D" parent="."]
+self_modulate = Color(0.880702, 0.750551, 0.718614, 1)
+position = Vector2(31.2946, 63.7485)
+rotation = -0.432605
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral2" type="Sprite2D" parent="."]
+position = Vector2(-56.7054, 138.749)
+rotation = -0.99772
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral3" type="Sprite2D" parent="."]
+position = Vector2(49.2946, 28.7485)
+rotation = -0.256506
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral4" type="Sprite2D" parent="."]
+position = Vector2(-28.4114, 51.8845)
+rotation = -1.0513
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral5" type="Sprite2D" parent="."]
+position = Vector2(131, 17.7465)
+rotation = -0.125297
+scale = Vector2(1.34934, 1.50542)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral6" type="Sprite2D" parent="."]
+position = Vector2(-20.2704, 21.1255)
+rotation = -0.246288
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral7" type="Sprite2D" parent="."]
+position = Vector2(-108.27, 96.1255)
+rotation = -0.811403
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral8" type="Sprite2D" parent="."]
+position = Vector2(-2.27037, -13.8745)
+rotation = -0.0701892
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral9" type="Sprite2D" parent="."]
+position = Vector2(-79.9763, 9.26149)
+rotation = -0.864983
+scale = Vector2(1.62982, 1.62667)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral10" type="Sprite2D" parent="."]
+position = Vector2(79.4343, -24.8765)
+rotation = 0.0610197
+scale = Vector2(1.34934, 1.50542)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral11" type="Sprite2D" parent="."]
+position = Vector2(-4.00035, -41.2535)
+rotation = -0.125297
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral12" type="Sprite2D" parent="."]
+position = Vector2(98.9996, -44.2535)
+rotation = -0.125297
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral13" type="Sprite2D" parent="."]
+position = Vector2(162, -25.2535)
+rotation = -0.125297
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral14" type="Sprite2D" parent="."]
+self_modulate = Color(0.780392, 0.627451, 0.509804, 0.898039)
+z_index = 7
+position = Vector2(57.9996, 3.74648)
+rotation = -0.280506
+scale = Vector2(2, 2.27778)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral15" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(162, -18.2535)
+rotation = -0.125297
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral16" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(209, -12.2535)
+rotation = -0.040921
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral17" type="Sprite2D" parent="."]
+self_modulate = Color(0.780392, 0.627451, 0.509804, 0.898039)
+z_index = 7
+position = Vector2(136, -16.2535)
+rotation = 0.0611247
+scale = Vector2(2, 2.27778)
+texture = ExtResource("2_yn1h0")
+
+[node name="Coral18" type="Sprite2D" parent="."]
+position = Vector2(1071, 606)
+scale = Vector2(3.32, 3.32)
+texture = ExtResource("3_nemtd")
+
+[node name="Coral19" type="Sprite2D" parent="."]
+position = Vector2(978, 641)
+scale = Vector2(3.42, 3.42)
+texture = ExtResource("3_nemtd")
+
+[node name="Coral20" type="Sprite2D" parent="."]
+position = Vector2(1154, 451)
+rotation = -1.32467
+scale = Vector2(2.44, 2.44)
+texture = ExtResource("3_nemtd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-10, -1, -4, 122, -7, 624, 18, 652, 1143, 655, 1145, -18, -7, -24, 33, -126, 1174, -144, 1274, -106, 1314, 758, 1074, 849, -141, 801, -273, 550, -213, 5, -7, -24)
+
+[node name="Player" parent="." instance=ExtResource("4_yn1h0")]
+position = Vector2(543, 416)
+scale = Vector2(0.7, 0.7)
+shield = true
+
+[node name="Shield" type="Sprite2D" parent="Player"]
+position = Vector2(2, -91)
+texture = ExtResource("5_m2ccp")
+script = SubResource("GDScript_7edhw")
+
+[node name="Area2D" type="Area2D" parent="Player/Shield"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player/Shield/Area2D"]
+polygon = PackedVector2Array(-77, 12, -77, 20, -64, 26, -32, 10, -5, -3, 24, 3, 47, 21, 58, 29, 75, 22, 75, 10, 50, -13, 11, -24, -35, -21, -58, -9)
+
+[node name="can_pause" parent="." instance=ExtResource("5_nemtd")]
+
+[node name="HereraFight" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(549, 118)
+scale = Vector2(0.641935, 0.641935)
+texture = ExtResource("7_7edhw")
+script = SubResource("GDScript_2n7ju")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-10, -1, -4, 122, -7, 624, 18, 652, 1143, 655, 1145, -18, -7, -24, 33, -126, 1174, -144, 1274, -106, 1314, 758, 1074, 849, -141, 801, -273, 550, -213, 5, -7, -24)
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="."]
+position = Vector2(186, 560)
+texture = ExtResource("8_2n7ju")
+lifetime = 1.7
+speed_scale = 0.7
+explosiveness = 0.2
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_4oyyd")
+
+[node name="GPUParticles2D5" type="GPUParticles2D" parent="."]
+position = Vector2(1017, 307)
+texture = ExtResource("8_2n7ju")
+lifetime = 1.7
+speed_scale = 0.7
+explosiveness = 0.2
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_4oyyd")
+
+[node name="GPUParticles2D6" type="GPUParticles2D" parent="."]
+position = Vector2(191, 141)
+texture = ExtResource("8_2n7ju")
+lifetime = 1.7
+speed_scale = 0.7
+explosiveness = 0.2
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_4oyyd")
+
+[node name="BattleMusic(music5)" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_360jh")
+autoplay = true

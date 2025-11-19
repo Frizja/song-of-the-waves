@@ -9,6 +9,7 @@
 resource_name = "Player"
 script/source = "extends CharacterBody2D
 @export var force = 0.002
+@export var shield = false
 var last_checkpoint = Vector2(0,0)
 var rot = 0.1
 var instance
@@ -17,7 +18,11 @@ var SpeechBubble = preload(\"res://Scenes/speech_bubble.tscn\")
 var chosen
 
 func _ready() -> void:
-	pass
+	if shield == true:
+		if !Global.items.has(\"Shell Shield\"):
+			for i in get_children():
+				if i.name == \"Shield\":
+					i.queue_free()
 	#if Global.level == 1 and not Global.already_seen_intro:
 		#for i in Global.Dialog[Global.lang][\"Intro\"]:
 		#	say(i)

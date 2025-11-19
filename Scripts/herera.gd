@@ -2,6 +2,7 @@ extends Sprite2D
 var instance
 var interacting
 var SpeechBubble = preload("res://Scenes/speech_bubble.tscn")
+var HereraFight = preload("res://Scenes/fight_herera.tscn")
 var chosen
 var talked = 0
 @onready var area = $Area2D
@@ -14,6 +15,12 @@ func _ready() -> void:
 		if str(area.get_overlapping_areas()).contains("PlayerHitbox") and Input.is_action_just_pressed("Space"):
 			for i in Global.Dialog[Global.lang]["Herera"]:
 				say(i)
+			while interacting:
+				await get_tree().process_frame
+			if chosen == "Okay, I will!":
+				instance = HereraFight.instantiate()
+				get_parent().get_parent().add_child(instance)
+				get_parent().queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

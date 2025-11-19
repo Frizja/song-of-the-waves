@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c17kfkeu7onk3"]
+[gd_scene load_steps=82 format=3 uid="uid://c17kfkeu7onk3"]
 
 [ext_resource type="PackedScene" uid="uid://byurrdauqd5ug" path="res://Scenes/pufferfish.tscn" id="1_6444e"]
 [ext_resource type="PackedScene" uid="uid://cd8cnrhkakxiq" path="res://Scenes/enemy.tscn" id="2_evi0p"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bn8rqi5y1v8v8" path="res://Scenes/jellyfish.tscn" id="21_imks0"]
 [ext_resource type="PackedScene" uid="uid://d25giu55woyxg" path="res://Scenes/shell.tscn" id="22_dlmop"]
 [ext_resource type="PackedScene" uid="uid://cxocwmtdaeuoc" path="res://Scenes/herera.tscn" id="23_sda17"]
+[ext_resource type="AudioStream" uid="uid://dcargyso46llg" path="res://Assets/Cascade of clouds.wav" id="24_1fal7"]
 
 [sub_resource type="Gradient" id="Gradient_wowpa"]
 colors = PackedColorArray(0.0823529, 0.631373, 0.760784, 0.996078, 1, 1, 1, 0)
@@ -79,7 +80,7 @@ gradient = SubResource("Gradient_6ioyp")
 [sub_resource type="Gradient" id="Gradient_8i23i"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.294118)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8yhm2"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sda17"]
 gradient = SubResource("Gradient_8i23i")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pjppf"]
@@ -91,7 +92,7 @@ angle_min = -16.6
 angle_max = 74.5
 gravity = Vector3(0, -90, 0)
 color = Color(1, 1, 1, 0.662745)
-color_ramp = SubResource("GradientTexture1D_8yhm2")
+color_ramp = SubResource("GradientTexture1D_sda17")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8i23i"]
 resource_local_to_scene = true
@@ -126,9 +127,6 @@ resource_local_to_scene = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u5cqy"]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0op5"]
-resource_local_to_scene = true
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1f27d"]
 resource_local_to_scene = true
 
@@ -145,6 +143,81 @@ resource_local_to_scene = true
 resource_local_to_scene = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vyomg"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x5u8r"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwpk5"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lk3dh"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7sml1"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xcdlm"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlonh"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s764c"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpjai"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yaxpm"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8f0cu"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6dp3"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ceot"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lcsmq"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hv30f"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v6i5l"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x68w5"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bvyvf"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ltqn3"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wb0u"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nx6ne"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mdi36"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h3d7q"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6axy7"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnaei"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cocpr"]
 resource_local_to_scene = true
 
 [node name="Level1" type="Node2D"]
@@ -644,10 +717,6 @@ speed = 4
 minX = 490
 maxX = 933
 
-[node name="PufferfishEnemy10" parent="." instance=ExtResource("1_6444e")]
-material = SubResource("ShaderMaterial_u0op5")
-position = Vector2(1137, 623)
-
 [node name="Enemy6" parent="." instance=ExtResource("2_evi0p")]
 material = SubResource("ShaderMaterial_1f27d")
 position = Vector2(460, 966)
@@ -751,4 +820,218 @@ position = Vector2(4355, -1449)
 rotation = -0.712832
 
 [node name="Herera" parent="." instance=ExtResource("23_sda17")]
-position = Vector2(291, 471)
+position = Vector2(6808, 29.0001)
+rotation = 0.301077
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(4089, -944)
+stream = ExtResource("24_1fal7")
+autoplay = true
+max_distance = 4096.0
+
+[node name="Jellyfish3" parent="." instance=ExtResource("21_imks0")]
+position = Vector2(6382, 1325)
+rotation = 0.98792
+
+[node name="PufferfishEnemy13" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_x5u8r")
+position = Vector2(6288, 1364)
+
+[node name="PufferfishEnemy14" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_nwpk5")
+position = Vector2(6489, 1311)
+
+[node name="PufferfishEnemy15" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_lk3dh")
+position = Vector2(6287, 1281)
+rot = -0.2
+
+[node name="PufferfishEnemy17" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_7sml1")
+position = Vector2(6214, 1296)
+rot = 0.1
+
+[node name="Checkpoint3" parent="." instance=ExtResource("12_uy8f0")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(3138, 258)
+scale = Vector2(6.0193, 283.825)
+
+[node name="Checkpoint4" parent="." instance=ExtResource("12_uy8f0")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(5492, -18)
+scale = Vector2(6.0193, 283.825)
+
+[node name="Enemy8" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_xcdlm")
+position = Vector2(3991, 793)
+speed = -5
+minX = 4300
+maxX = 5200
+
+[node name="PufferfishEnemy19" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_wlonh")
+position = Vector2(4476, 1322)
+rot = 0.5
+
+[node name="PufferfishEnemy21" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_s764c")
+position = Vector2(3829, 111)
+
+[node name="PufferfishEnemy22" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_kpjai")
+position = Vector2(4029, -135)
+rot = -0.2
+
+[node name="PufferfishEnemy23" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_yaxpm")
+position = Vector2(4146, -850)
+
+[node name="PufferfishEnemy24" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_8f0cu")
+position = Vector2(4042, 1352)
+
+[node name="PufferfishEnemy25" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_g6dp3")
+position = Vector2(4405, 717)
+
+[node name="PufferfishEnemy26" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_5ceot")
+position = Vector2(4184, 704)
+rot = 0.1
+
+[node name="PufferfishEnemy27" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_lcsmq")
+position = Vector2(4359, 78)
+
+[node name="PufferfishEnemy28" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_hv30f")
+position = Vector2(4438, -750)
+
+[node name="PufferfishEnemy29" parent="." instance=ExtResource("1_6444e")]
+material = SubResource("ShaderMaterial_v6i5l")
+position = Vector2(4288, 763)
+rot = 0.3
+
+[node name="Shell18" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(3830, 637)
+
+[node name="Shell19" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4345, -571)
+rotation = -0.402207
+
+[node name="Shell20" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4478, 463)
+rotation = 0.846767
+
+[node name="Shell21" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4827, 807)
+rotation = -0.511731
+
+[node name="Enemy9" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_x68w5")
+position = Vector2(4382, 1050)
+speed = -5
+minX = 4300
+maxX = 5200
+
+[node name="Enemy10" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_bvyvf")
+position = Vector2(4509, 775)
+minX = 907
+maxX = 1001
+
+[node name="Enemy11" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_ltqn3")
+position = Vector2(4495, 255)
+color = Color(0.761191, 0.312091, 0.506246, 1)
+speed = -5
+minX = 4300
+maxX = 5200
+
+[node name="Enemy12" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_0wb0u")
+position = Vector2(4301, 1139)
+speed = -3
+minX = 4300
+maxX = 5200
+
+[node name="Enemy13" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_nx6ne")
+position = Vector2(4218, 940)
+speed = -7
+minX = 4300
+maxX = 5200
+
+[node name="Enemy14" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_mdi36")
+position = Vector2(4062, 160)
+color = Color(0.392875, 0.159478, 0.108192, 1)
+speed = -5
+minX = 4300
+maxX = 5200
+
+[node name="Enemy15" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_h3d7q")
+position = Vector2(4509, 775)
+color = Color(0.352804, 0.583418, 0.629269, 1)
+minX = 4300
+maxX = 5200
+
+[node name="Enemy16" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_6axy7")
+position = Vector2(4224, -119)
+color = Color(0.750411, 0.408606, 0.574567, 1)
+speed = -5
+minX = 4300
+maxX = 5200
+
+[node name="Enemy17" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_wnaei")
+position = Vector2(4171, 271)
+speed = -3
+minX = 4300
+maxX = 5200
+
+[node name="Enemy18" parent="." instance=ExtResource("2_evi0p")]
+material = SubResource("ShaderMaterial_cocpr")
+position = Vector2(3927, 298)
+color = Color(0.280505, 0.579633, 0.370098, 1)
+speed = -7
+minX = 4300
+maxX = 5200
+
+[node name="Shell22" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4886, 260)
+rotation = 0.413286
+
+[node name="Shell23" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(5295, 58)
+rotation = -0.288776
+
+[node name="Shell24" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(5593, 122)
+
+[node name="Shell25" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(6232, -2)
+rotation = 0.926352
+
+[node name="Shell26" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(5192, 573)
+
+[node name="Shell27" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(5351, 290)
+
+[node name="Shell28" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(4660, -166)
+
+[node name="Shell29" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(5196, -80)
+
+[node name="Shell30" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(5651, 376)
+
+[node name="Shell31" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(5979, 82)
+
+[node name="Shell32" parent="." instance=ExtResource("22_dlmop")]
+position = Vector2(5475, 735)

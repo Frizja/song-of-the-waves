@@ -11,6 +11,7 @@ var Jellyfish = 0
 var items = []
 
 func _ready() -> void:
+	#items.append("Shell Shield")
 	Dialog = load_json(data_file_path)
 
 func load_json(path:String):
