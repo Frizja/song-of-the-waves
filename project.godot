@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0.405934, 0.422968, 0.811761, 1)
 config/icon="uid://dxvy1int1n8eh"
 
+[audio]
+
+general/default_playback_type.web=0
+
 [autoload]
 
 Global="*res://global.gd"
